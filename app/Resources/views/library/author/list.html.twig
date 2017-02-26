@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2 class="page-headers">All authors</h2>
+    <table class="table table-hover">
+        <thead> 
+            <tr> 
+                <th>#</th> 
+                <th>Name</th> 
+                <th>Options</th>
+            </tr> 
+        </thead>
+        {% for author in authors %}
+            <tr>
+                <td>
+                    {{ author.idAuthor }}
+                </td>
+                <td>
+                    {{ author.name }} {{ author.lastname }}
+                </td>
+                <td>
+                    <a href="/author/details/{{ author.idAuthor }}" class="btn btn-success">Details</a>
+                    <a href="/author/edit/{{ author.idAuthor }}" class="btn btn-warning">Edit</a>
+                    <a href="/author/delete/{{ author.idAuthor }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

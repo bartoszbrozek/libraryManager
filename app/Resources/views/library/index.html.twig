@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2 class="page-headers">Your books</h2>
+    <table class="table table-hover">
+        <thead> 
+            <tr> 
+                <th>#</th> 
+                <th>Title</th> 
+                <th>Release date</th> 
+                <th>Description</th>
+                <th>ISBN</th>
+                <th>Publishing house</th>
+                <th>Original Title</th>
+            </tr> 
+        </thead>
+        {% for book in books %}
+            <tr>
+                <td>
+                    {{ book.idBook }}
+                </td>
+                <td>
+                    {{ book.title }}
+                </td>
+                <td>
+                    {{ book.date|date('F j, Y, g:i a') }}
+                </td>
+                <td>
+                    {{ book.description }}
+                </td>
+                <td>
+                    {{ book.isbn }}
+                </td>
+                <td>
+                    {{ book.publishingHouse }}
+                </td>
+                <td>
+                    {{ book.originalTitle }}
+                </td>
+
+                <td>
+                    <a href="/book/details/{{ book.idBook }}" class="btn btn-success">Details</a>
+                    <a href="/book/edit/{{ book.idBook }}" class="btn btn-warning">Edit</a>
+                    <a href="/book/delete/{{ book.idBook }}" class="btn btn-danger">Delete</a>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block errors %}
+    {% for flash_message in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block notices %}
+    {% for flash_message in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block body %}
+    <h2>
+        Create a new author
+    </h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    
+{% endblock %}

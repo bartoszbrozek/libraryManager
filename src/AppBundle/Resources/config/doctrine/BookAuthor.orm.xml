@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\BookAuthor" table="book_author">
+    <indexes>
+      <index name="id_author" columns="id_author"/>
+      <index name="id_book" columns="id_book"/>
+      <index name="id_role" columns="id_role"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="idAuthor" target-entity="Author" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_author" referenced-column-name="id_author"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idBook" target-entity="Book" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_book" referenced-column-name="id_book"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idRole" target-entity="Role" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_role" referenced-column-name="id_role"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

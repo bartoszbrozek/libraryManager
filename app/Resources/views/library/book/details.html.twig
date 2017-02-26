@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block errors %}
+    {% for flash_message in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block notices %}
+    {% for flash_message in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+{#        {{ dump(book) }}#}
+        {#BOOK TITLE#}
+        <h2>{{ book[0].title }}</h2>
+        <h4>
+            {% for author in authors %}
+                {% if author.r_idRole == 1 %}
+                    {{ author.a_name }} {{ author.a_lastname}}{% if not loop.last and loop.length > 1%},{% endif %}
+                {% endif %}
+            {% endfor %}
+        </h4>
+        {#MENU#}
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#basicInfo">Basic info</a></li>
+            <li><a data-toggle="tab" href="#authors">Authors</a></li>
+        </ul>
+
+
+        {#MAIN CONTENT#}
+
+        <div class="tab-content">
+            <div id="basicInfo" class="tab-pane fade in active">
+                <div class="panel-group">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h4>Description</h4></div>
+                        <div class="panel-body">
+                            {{ book[0].description }}
+                        </div>
+                    </div>
+
+                    {#                        Book info#}
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Book info</h4></div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+
+                                <li class="list-group-item">
+                                    <h5 class="list-group-item-heading"><strong>Publication date</strong></h5>
+                                    {{ book[0].date|date('Y-m-d') }}
+                                </li>
+
+                                <li class="list-group-item">
+                                    <h5 class="list-group-item-heading"><strong>ISBN</strong></h5>
+                                    {{ book[0].isbn }}
+                                </li>
+
+                                {% if (book[0].originalTitle) %}
+                                    <li class="list-group-item">
+                                        <h5 class="list-group-item-heading"><strong>Original title</strong></h5>
+                                        {{ book[0].originalTitle }}
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {#            Authors#}
+            {#            {{ dump(authors) }}#}
+            <div id="authors" class="tab-pane fade">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Authors</h4></div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+
+                            {% for key, author in authors %}
+                                <li class="list-group-item">
+
+                                    <h5 class="list-group-item-heading"><strong>Name</strong></h5>
+                                    <p>{{ author.a_name }} {{ author.a_lastname }}</p>
+
+                                    <h5 class="list-group-item-heading"><strong>Role</strong></h5>
+                                    <p>{{ author.r_name }}</p>
+                                </li> 
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}
